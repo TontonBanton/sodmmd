@@ -955,6 +955,8 @@ Private Sub lvwSummary_DblClick()
         If Not lvwSummary.SelectedItem = " " Then
             framePODetails.Visible = False
         End If
+    Else
+        MsgBox "Trial"
     End If
 End Sub
 Private Sub cboMonth_KeyPress(KeyAscii As Integer)
