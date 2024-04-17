@@ -8,7 +8,7 @@ Begin VB.Form FormReport
    ClientHeight    =   10800
    ClientLeft      =   2640
    ClientTop       =   375
-   ClientWidth     =   16905
+   ClientWidth     =   16875
    Icon            =   "Report.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
@@ -16,7 +16,7 @@ Begin VB.Form FormReport
    Moveable        =   0   'False
    ScaleHeight     =   10800
    ScaleMode       =   0  'User
-   ScaleWidth      =   25000
+   ScaleWidth      =   24955.63
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame framePODetails 
       BackColor       =   &H00C0C0C0&
@@ -30,13 +30,13 @@ Begin VB.Form FormReport
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00004000&
-      Height          =   3900
-      Left            =   1200
+      Height          =   4020
+      Left            =   3840
       TabIndex        =   39
-      Top             =   3600
+      Top             =   2880
       Visible         =   0   'False
       Width           =   7045
-      Begin VB.TextBox txtPOGroup 
+      Begin VB.TextBox txtPONum 
          BackColor       =   &H80000004&
          BeginProperty Font 
             Name            =   "Arial Narrow"
@@ -57,8 +57,7 @@ Begin VB.Form FormReport
          Top             =   400
          Width           =   4740
       End
-      Begin VB.TextBox txtPOCost 
-         Alignment       =   1  'Right Justify
+      Begin VB.TextBox txtPOTR 
          BeginProperty Font 
             Name            =   "Arial Narrow"
             Size            =   21.75
@@ -68,14 +67,14 @@ Begin VB.Form FormReport
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   600
+         Height          =   615
          Left            =   1920
          MaxLength       =   50
          TabIndex        =   43
-         Top             =   1680
+         Top             =   1690
          Width           =   4770
       End
-      Begin VB.TextBox txtPOItem 
+      Begin VB.TextBox txtPOStatus 
          BackColor       =   &H80000004&
          Enabled         =   0   'False
          BeginProperty Font 
@@ -87,7 +86,7 @@ Begin VB.Form FormReport
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H000000C0&
+         ForeColor       =   &H80000001&
          Height          =   600
          Left            =   1920
          Locked          =   -1  'True
@@ -107,15 +106,14 @@ Begin VB.Form FormReport
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   550
+         Height          =   675
          Left            =   360
          Style           =   1  'Graphical
          TabIndex        =   41
          Top             =   3120
          Width           =   6360
       End
-      Begin VB.TextBox txtPOAmount 
-         Alignment       =   1  'Right Justify
+      Begin VB.TextBox txtPOMRR 
          BackColor       =   &H80000004&
          BeginProperty Font 
             Name            =   "Arial Narrow"
@@ -126,19 +124,39 @@ Begin VB.Form FormReport
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H000000C0&
-         Height          =   600
+         ForeColor       =   &H00000000&
+         Height          =   615
          Left            =   1920
          Locked          =   -1  'True
          MaxLength       =   50
          TabIndex        =   40
-         Top             =   2280
+         Top             =   2320
          Width           =   4770
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          BackColor       =   &H00C0C0C0&
-         Caption         =   "COST "
+         Caption         =   "MRR"
+         BeginProperty Font 
+            Name            =   "Arial Narrow"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   345
+         Index           =   0
+         Left            =   360
+         TabIndex        =   48
+         Top             =   2400
+         Width           =   525
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         BackColor       =   &H00C0C0C0&
+         Caption         =   "STATUS"
          BeginProperty Font 
             Name            =   "Arial Narrow"
             Size            =   14.25
@@ -150,15 +168,15 @@ Begin VB.Form FormReport
          EndProperty
          Height          =   345
          Index           =   13
-         Left            =   480
+         Left            =   360
          TabIndex        =   47
-         Top             =   1320
-         Width           =   705
+         Top             =   1200
+         Width           =   930
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          BackColor       =   &H00C0C0C0&
-         Caption         =   "QTY"
+         Caption         =   " NUMBER"
          BeginProperty Font 
             Name            =   "Arial Narrow"
             Size            =   14.25
@@ -170,15 +188,15 @@ Begin VB.Form FormReport
          EndProperty
          Height          =   345
          Index           =   3
-         Left            =   480
+         Left            =   360
          TabIndex        =   46
          Top             =   600
-         Width           =   480
+         Width           =   1065
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
          BackColor       =   &H00C0C0C0&
-         Caption         =   "AMOUNT "
+         Caption         =   "TR"
          BeginProperty Font 
             Name            =   "Arial Narrow"
             Size            =   14.25
@@ -190,18 +208,18 @@ Begin VB.Form FormReport
          EndProperty
          Height          =   345
          Index           =   14
-         Left            =   480
+         Left            =   360
          TabIndex        =   45
-         Top             =   1920
-         Width           =   1080
+         Top             =   1800
+         Width           =   315
       End
    End
    Begin VB.Frame FrameMIS 
       BackColor       =   &H00C0C0C0&
       Height          =   1245
-      Left            =   12120
+      Left            =   12600
       TabIndex        =   25
-      Top             =   1560
+      Top             =   6600
       Visible         =   0   'False
       Width           =   4125
       Begin VB.OptionButton OptMISCharge 
@@ -362,9 +380,9 @@ Begin VB.Form FormReport
    Begin VB.Frame FrameMRR 
       BackColor       =   &H00C0C0C0&
       Height          =   1245
-      Left            =   10200
+      Left            =   14280
       TabIndex        =   21
-      Top             =   1560
+      Top             =   7920
       Visible         =   0   'False
       Width           =   1875
       Begin VB.OptionButton OptMRRNumber 
@@ -780,7 +798,7 @@ Begin VB.Form FormReport
          EndProperty
          Height          =   375
          ItemData        =   "Report.frx":273CF
-         Left            =   200
+         Left            =   240
          List            =   "Report.frx":273F7
          TabIndex        =   0
          Top             =   650
@@ -923,6 +941,35 @@ Private Sub Form_Load()
     Load Me
     ConnectToDB
     lblComp.Caption = FormMainMenu.lblComp.Caption: GetCurrentDate
+    
+    
+    'Load year
+    Dim currentDate As Date
+    currentDate = Date
+    StartMonth = DateSerial(Year(currentDate), 1, 1)
+    EndMonth = DateSerial(Year(currentDate) + 1, 1, 0)
+    cboPO.Text = "NUMBER": OptSummary.Value = True
+      SetlvwPO
+      strsql = "SELECT Distinct PONum, PODate, POArea, POPrs, POSupplier, POTerms, POWork, POEquip, POTotal ,POStatus, POTr, POMrr From PODetails " _
+            & " WHERE PODate BETWEEN #" & StartMonth & "# And #" & EndMonth & "# ORDER BY PONum"
+            CommandExecute
+            lvwSummary.ForeColor = &H0&
+        With mmsADORst
+        Do Until .EOF
+          Set SummaryLI = lvwSummary.ListItems.Add(, , !PONum & "")
+              SummaryLI.SubItems(1) = !PODate: SummaryLI.SubItems(2) = !POSupplier: SummaryLI.SubItems(3) = !POTerms
+              SummaryLI.SubItems(4) = !POPrs: SummaryLI.SubItems(5) = !POWork: SummaryLI.SubItems(6) = !POEquip
+              SummaryLI.SubItems(7) = Format$(!POTotal, "#,###.#0"): SummaryLI.SubItems(8) = !POStatus
+              SummaryLI.SubItems(9) = !POTr: SummaryLI.SubItems(10) = !POMrr
+            .MoveNext
+        Loop
+    End With
+    POTotal
+    SummaryLI.SubItems(7) = Format$(SummaryTotal, "#,###.#0"): SummaryLI.ListSubItems(7).ForeColor = &HC0&
+    txtDRStart.Text = Format$(StartMonth, "mm/dd/yyyy"): txtDREnding.Text = Format$(EndMonth, "mm/dd/yyyy")
+    
+           
+
 End Sub
 Private Sub Form_Unload(Cancel As Integer)
      Unload Me
@@ -947,16 +994,19 @@ Private Sub ConnectToDB()
     mmsAdoCmd.CommandType = adCmdText
 
 End Sub
+
 '---------------------------------------------------------------------------------
 '                         C O N T R O L S   E V E N T S
 '---------------------------------------------------------------------------------
 Private Sub lvwSummary_DblClick()
     If cboPO.Text = "NUMBER" And OptSummary.Value = True Then
         If Not lvwSummary.SelectedItem = " " Then
-            framePODetails.Visible = False
+            framePODetails.Visible = True
+            txtPONum.Text = lvwSummary.SelectedItem
+            txtPOStatus.Text = lvwSummary.SelectedItem.SubItems(8)
+            txtPOTR.Text = lvwSummary.SelectedItem.SubItems(9)
+            txtPOMRR.Text = lvwSummary.SelectedItem.SubItems(10)
         End If
-    Else
-        MsgBox "Trial"
     End If
 End Sub
 Private Sub cboMonth_KeyPress(KeyAscii As Integer)
@@ -972,7 +1022,7 @@ Private Sub cboMonth_GotFocus()
  ClearOptions
 End Sub
 Private Sub cboMonth_Click()
-   lvwSummary.ListItems.Clear
+   'lvwSummary.ListItems.Clear
    ReportRange
 End Sub
 Private Sub cboMonth_LostFocus()
@@ -981,7 +1031,7 @@ Private Sub cboMonth_LostFocus()
    Else
        txtYear.Text = Year(Now)
    End If
-   lvwSummary.ListItems.Clear
+   'lvwSummary.ListItems.Clear
    ReportRange
 End Sub
 Private Sub txtDRStart_GotFocus()
@@ -1028,10 +1078,10 @@ Private Sub txtYear_KeyPress(KeyAscii As Integer)
        Else
        End If
     End If
-   lvwSummary.ListItems.Clear
+   'lvwSummary.ListItems.Clear
 End Sub
 Private Sub txtYear_LostFocus()
-   lvwSummary.ListItems.Clear
+   'lvwSummary.ListItems.Clear
    'ReportRange
 End Sub
 Private Sub txtYear_GotFocus()

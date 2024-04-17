@@ -150,7 +150,7 @@ Begin {C0E45035-5775-11D0-B388-00A0C9055D8E} DataEnvironment1
       CommandName     =   "Command6"
       CommDispId      =   -1
       RsDispId        =   -1
-      CommandText     =   $"DataEnvironment1.dsx":00A0
+      CommandText     =   $"DataEnvironment1.dsx":0089
       ActiveConnectionName=   "Connection1"
       CommandType     =   1
       RelateToParent  =   -1  'True
@@ -1014,7 +1014,7 @@ Begin {C0E45035-5775-11D0-B388-00A0C9055D8E} DataEnvironment1
       CommandName     =   "TransHeader"
       CommDispId      =   1123
       RsDispId        =   1144
-      CommandText     =   $"DataEnvironment1.dsx":00C2
+      CommandText     =   $"DataEnvironment1.dsx":00AB
       ActiveConnectionName=   "Connection1"
       CommandType     =   1
       IsRSReturning   =   -1  'True
