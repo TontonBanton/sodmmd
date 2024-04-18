@@ -1119,7 +1119,7 @@ Private Sub cmdPrint_Click()
     ListViewPrint
 End Sub
 Private Sub cmdSavePODetails_Click()
-    strsql = "Update PODetails SET POStatus = '" & txtPOStatus.Text & "', POTr = '" & txtPOTR.Text & "', POMrr = '" & txtPOMRR.Text & "'  where PONum like '" & txtPONum.Text & "'": MsgBox strsql: CommandExecute
+    strsql = "Update PODetails SET POStatus = '" & txtPOStatus.Text & "', POTr = '" & txtPOTR.Text & "', POMrr = '" & txtPOMRR.Text & "'  where PONum like '" & txtPONum.Text & "'": CommandExecute
     framePODetails.Visible = False: Form_Load
 End Sub
 Private Sub CmdExit_Click()
