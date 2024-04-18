@@ -30,12 +30,31 @@ Begin VB.Form FormReport
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00004000&
-      Height          =   4020
-      Left            =   3840
+      Height          =   4140
+      Left            =   5040
       TabIndex        =   39
       Top             =   2880
       Visible         =   0   'False
       Width           =   7045
+      Begin VB.ComboBox txtPOStatus 
+         BeginProperty Font 
+            Name            =   "Arial Narrow"
+            Size            =   18
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   555
+         ItemData        =   "Report.frx":27337
+         Left            =   1920
+         List            =   "Report.frx":27341
+         TabIndex        =   48
+         Text            =   "txtPOStatus"
+         Top             =   1080
+         Width           =   4730
+      End
       Begin VB.TextBox txtPONum 
          BackColor       =   &H80000004&
          BeginProperty Font 
@@ -52,10 +71,10 @@ Begin VB.Form FormReport
          Left            =   1920
          Locked          =   -1  'True
          MaxLength       =   50
-         TabIndex        =   44
+         TabIndex        =   43
          TabStop         =   0   'False
          Top             =   400
-         Width           =   4740
+         Width           =   4700
       End
       Begin VB.TextBox txtPOTR 
          BeginProperty Font 
@@ -70,30 +89,9 @@ Begin VB.Form FormReport
          Height          =   615
          Left            =   1920
          MaxLength       =   50
-         TabIndex        =   43
-         Top             =   1690
-         Width           =   4770
-      End
-      Begin VB.TextBox txtPOStatus 
-         BackColor       =   &H80000004&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Arial Narrow"
-            Size            =   15.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H80000001&
-         Height          =   600
-         Left            =   1920
-         Locked          =   -1  'True
-         MaxLength       =   50
          TabIndex        =   42
-         Top             =   1050
-         Width           =   4740
+         Top             =   1690
+         Width           =   4700
       End
       Begin VB.CommandButton cmdSavePODetails 
          Caption         =   "SAVE"
@@ -106,7 +104,7 @@ Begin VB.Form FormReport
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   675
+         Height          =   795
          Left            =   360
          Style           =   1  'Graphical
          TabIndex        =   41
@@ -127,11 +125,10 @@ Begin VB.Form FormReport
          ForeColor       =   &H00000000&
          Height          =   615
          Left            =   1920
-         Locked          =   -1  'True
          MaxLength       =   50
          TabIndex        =   40
          Top             =   2320
-         Width           =   4770
+         Width           =   4700
       End
       Begin VB.Label Label1 
          AutoSize        =   -1  'True
@@ -149,7 +146,7 @@ Begin VB.Form FormReport
          Height          =   345
          Index           =   0
          Left            =   360
-         TabIndex        =   48
+         TabIndex        =   47
          Top             =   2400
          Width           =   525
       End
@@ -169,7 +166,7 @@ Begin VB.Form FormReport
          Height          =   345
          Index           =   13
          Left            =   360
-         TabIndex        =   47
+         TabIndex        =   46
          Top             =   1200
          Width           =   930
       End
@@ -189,7 +186,7 @@ Begin VB.Form FormReport
          Height          =   345
          Index           =   3
          Left            =   360
-         TabIndex        =   46
+         TabIndex        =   45
          Top             =   600
          Width           =   1065
       End
@@ -209,7 +206,7 @@ Begin VB.Form FormReport
          Height          =   345
          Index           =   14
          Left            =   360
-         TabIndex        =   45
+         TabIndex        =   44
          Top             =   1800
          Width           =   315
       End
@@ -617,9 +614,9 @@ Begin VB.Form FormReport
                Strikethrough   =   0   'False
             EndProperty
             Height          =   390
-            ItemData        =   "Report.frx":27337
+            ItemData        =   "Report.frx":27358
             Left            =   1560
-            List            =   "Report.frx":2734D
+            List            =   "Report.frx":2736E
             TabIndex        =   36
             Top             =   720
             Width           =   2175
@@ -654,9 +651,9 @@ Begin VB.Form FormReport
                Strikethrough   =   0   'False
             EndProperty
             Height          =   390
-            ItemData        =   "Report.frx":27383
+            ItemData        =   "Report.frx":273A4
             Left            =   1560
-            List            =   "Report.frx":27399
+            List            =   "Report.frx":273BA
             TabIndex        =   34
             Top             =   240
             Width           =   2175
@@ -797,9 +794,9 @@ Begin VB.Form FormReport
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         ItemData        =   "Report.frx":273CF
+         ItemData        =   "Report.frx":273F0
          Left            =   240
-         List            =   "Report.frx":273F7
+         List            =   "Report.frx":27418
          TabIndex        =   0
          Top             =   650
          Width           =   2300
@@ -921,16 +918,10 @@ Private mmsADORst           As ADODB.Recordset
 Private dbcommand           As ADODB.Command
 Private strsql              As String
 
-Dim SummaryLI, InventoryLI          As ListItem
-Dim SummaryRow                      As Integer
- 
-Dim ItemClick, Unit, TxtVal, NumVal, ConRemark, AssetID, AssetGroup, AssetATF                 As String
-Dim DeptItem, SupplierItem, MatItem, NumItem, TransactItem, PhaseItem, EquipItem, MRRItem     As String
-Dim POOpt, Header, GroupItem, LocationItem          As String
+Dim SummaryLI           As ListItem
+Dim SummaryTotal        As Currency
 
-Dim SummaryTotal, DeptPhaseSum, DeptGroupSum, NumSubTotal, ChargeTotal, VehicleTotal, PhaseGroupSum, QtyTotal  As Currency
-Dim i, Cost, AveCost, ItemInvID, MRSStock, MRSAmount, MISSTock, MISAmount, PreStock, PreAmount, PreCost, ItemAmount  As Double
-
+Dim Unit, POOpt, Header, GroupItem, LocationItem  As String
 Public ReportTransact, ReportType, ReportTittle, MonthSummary, StartMonth, EndMonth As String
 
 
@@ -1008,6 +999,9 @@ Private Sub lvwSummary_DblClick()
             txtPOMRR.Text = lvwSummary.SelectedItem.SubItems(10)
         End If
     End If
+End Sub
+Private Sub cboPO_Click()
+  framePODetails.Visible = False
 End Sub
 Private Sub cboMonth_KeyPress(KeyAscii As Integer)
    If KeyAscii = 13 Then
@@ -1088,6 +1082,34 @@ Private Sub txtYear_GotFocus()
    txtYear.SelStart = 0
    txtYear.SelLength = Len(txtYear.Text)
 End Sub
+Private Sub txtPOStatus_Click()
+    txtPOTR.SetFocus
+End Sub
+Private Sub txtPOStatus_KeyPress(KeyAscii As Integer)
+   KeyAscii = ConvertUpper(KeyAscii)
+    If KeyAscii = 13 Then
+        txtPOTR.SetFocus
+    End If
+End Sub
+Private Sub txtPOTR_GotFocus()
+    txtPOTR.SelLength = Len(txtPOTR.Text)
+End Sub
+Private Sub txtPOTR_KeyPress(KeyAscii As Integer)
+   KeyAscii = ConvertUpper(KeyAscii)
+    If KeyAscii = 13 Then
+        txtPOMRR.SetFocus
+    End If
+
+End Sub
+Private Sub txtPOMRR_GotFocus()
+    txtPOMRR.SelLength = Len(txtPOMRR.Text)
+End Sub
+Private Sub txtPOMRR_KeyPress(KeyAscii As Integer)
+   KeyAscii = ConvertUpper(KeyAscii)
+    If KeyAscii = 13 Then
+        cmdSavePODetails.SetFocus
+    End If
+End Sub
 '--------------------------------------------------------------------------------------
 '                        B U T T O N S   E V E N T S
 '--------------------------------------------------------------------------------------
@@ -1095,6 +1117,10 @@ Private Sub cmdPrint_Click()
     cmdPrint_LostFocus
     cmdExit.SetFocus
     ListViewPrint
+End Sub
+Private Sub cmdSavePODetails_Click()
+    strsql = "Update PODetails SET POStatus = '" & txtPOStatus.Text & "', POTr = '" & txtPOTR.Text & "', POMrr = '" & txtPOMRR.Text & "'  where PONum like '" & txtPONum.Text & "'": MsgBox strsql: CommandExecute
+    framePODetails.Visible = False: Form_Load
 End Sub
 Private Sub CmdExit_Click()
    If MsgBox("Are you sure you want to exit?", _
@@ -1114,6 +1140,7 @@ End Sub
 ' ------------------- S U M M A R Y -----------------------
 Private Sub OptSummary_GotFocus()
 On Error GoTo LocalError
+framePODetails.Visible = False
 OptSummary.FontBold = True: OptItem.FontBold = False
 StartMonth = txtDRStart.Text: EndMonth = txtDREnding.Text: ReportType = cboPO.Text: POOpt = "SUMMARY": POHead: SetlvwPO
 
@@ -1326,6 +1353,7 @@ End Sub
 ' ------------------- I T E M I Z E D -----------------------
 Private Sub OptItem_GotFocus()
 On Error GoTo LocalError
+framePODetails.Visible = False
 OptItem.FontBold = True: OptSummary.FontBold = False: SetlvwPO1
 StartMonth = txtDRStart.Text: EndMonth = txtDREnding.Text: ReportType = cboPO.Text: POOpt = "ITEM": POHead
 
@@ -1573,6 +1601,12 @@ Private Sub cmdExit_GotFocus()
 End Sub
 Private Sub cmdExit_LostFocus()
    cmdExit.BackColor = &H8000000F
+End Sub
+Private Sub cmdSavePODetails_GotFocus()
+   cmdSavePODetails.BackColor = &HC0FFC0
+End Sub
+Private Sub cmdSavePODetails_LostFocus()
+   cmdSavePODetails.BackColor = &H8000000F
 End Sub
 Private Sub CommandExecute()
     mmsAdoCmd.CommandText = strsql

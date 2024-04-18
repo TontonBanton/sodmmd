@@ -23,6 +23,7 @@ With FormReport
    .EndMonth = .MonthSummary & "/" & LastDay & "/" & .txtYear.Text
    .txtDRStart.Text = Format$(.StartMonth, "mm/dd/yyyy")
    .txtDREnding.Text = Format$(.EndMonth, "mm/dd/yyyy")
+   .framePODetails.Visible = False
 End With
 LocalError: Exit Sub
 End Sub
